@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 import action from './action';
 import doctorReducer from './reducer';
 import * as Services from './service';
@@ -6,7 +6,7 @@ import * as FILTER from './filters';
 const initialState = {
     filter: FILTER.ALL,
     refresh: false,
-    doctors: {},
+    doctors: [],
     pagination: { limit: 10, start: 0, total: 0, currentPage: 1, totalPages: 0 }
 }
 

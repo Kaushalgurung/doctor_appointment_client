@@ -1,10 +1,12 @@
 import './App.css';
+import Doctors from './doctors';
+import { DoctorContextProvider } from './doctors/context';
 
 function App() {
   return (
-    <div className="App">
-      Hello
-    </div>
+    <DoctorContextProvider>
+      <Doctors/>
+    </DoctorContextProvider>
   );
 }
 
