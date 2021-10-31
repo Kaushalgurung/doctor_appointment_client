@@ -1,3 +1,4 @@
+//(TODO: Samrat): conditional render Login page, list appointment and add doctor page
 import './App.css';
 import Doctors from './doctors';
 import { DoctorContextProvider } from './doctors/context';
@@ -6,10 +7,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Home from './Home';
 import About from './About';
+import Login from './Login';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/login">
+          <Login/>
         </Route>
       </Switch>
     </Router>

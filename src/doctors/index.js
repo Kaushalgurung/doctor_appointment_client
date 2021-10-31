@@ -92,7 +92,7 @@ const Doctors = () => {
     return (
         <div>
             <h1 >Doctors</h1>
-            {doctors && doctors.length ? (
+            {doctors ? (
                 <Table striped bordered hover >
                     <thead>
                         <tr>
