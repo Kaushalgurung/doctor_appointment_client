@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row } from 'react-bootstrap';
+import { Form, Button, Container, Row, Toast, ToastContainer } from 'react-bootstrap';
 import { login } from '../services'
+import { saveLoginInfo } from "../services/db";
+import { useHistory } from "react-router";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showToast, setToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastHeader, setToastHeader] = useState('');
+    const [toastBg, setToastBg] = useState('danger');
+    const history = useHistory();
     return (
         <Container fluid="sm" >
             <Form>
@@ -33,7 +40,30 @@ const Login = () => {
                 </Row>
                 <Button variant="primary" onClick={(e) => {
                     e.preventDefault();
-                    login({ email, password });
+                    login({ email, password }).then(res=>{
+                        console.log(res);
+                        if(res.error){
+                            setToastMessage(res.message);
+                            setToastHeader('Login Failed')
+                            setToastBg('danger');
+                            setToast(true);
+                        }else{
+                            saveLoginInfo(res.data.data).then(db_res=>{
+                                if(db_res.success){
+                                    setToastMessage("Login Successfull");
+                                    setToastHeader('Success')
+                                    setToastBg('success');
+                                    window.location.reload();
+                                }
+                                else{
+                                    setToastMessage(res.message);
+                                    setToastHeader('Login Failed')
+                                    setToastBg('danger');
+                                }
+                            });
+                            setToast(true);
+                        }
+                    });
                 }}
                 >
                     Submit
@@ -47,6 +77,14 @@ const Login = () => {
                     Reset
                 </Button>
             </Form>
+            <ToastContainer className="p-3" position='top-end'>
+                <Toast show={showToast} onClose={()=>setToast(false)} bg={toastBg}>
+                    <Toast.Header>
+                        <strong className="me-auto">{toastHeader}</strong>
+                    </Toast.Header>
+                    <Toast.Body>{toastMessage}</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </Container>
     )
 }

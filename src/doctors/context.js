@@ -29,13 +29,13 @@ export const DoctorContextProvider = ({ children }) => {
             console.log(err);
         }
     }, [state.filter, state.refresh])
-    return(
+    return (
         <DoctorContext.Provider
-        value={{
-            doctors: state.doctors,
-            refreshData,
-            pagination: state.pagination,
-        }}>
+            value={{
+                doctors: state.doctors,
+                refreshData,
+                pagination: state.pagination,
+            }}>
             {children}
         </DoctorContext.Provider>
     )
