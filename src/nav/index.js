@@ -1,9 +1,9 @@
 //(TODO: Samrat): conditional render Login page, list appointment and add doctor page
 import React, { useEffect, useState } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button} from "react-bootstrap";
 export default function Navs({ authenticated }) {
     return (
-        <Navbar collapseOnSelect expand="lg"  className="nav-color"  variant="dark" >
+        <Navbar collapseOnSelect expand="lg" className="nav-color" variant="dark" >
             <Container>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -21,6 +21,14 @@ export default function Navs({ authenticated }) {
                         }
                     </Nav>
                 </Navbar.Collapse>
+                <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Text>
+                        Signed in as : <a href="#login">Admin</a>
+                    </Navbar.Text>
+                </Navbar.Collapse>
+                    <Button variant="" onClick={()=>{
+                        console.log("logout")
+                    }}>Logout</Button>
             </Container>
         </Navbar>
     )

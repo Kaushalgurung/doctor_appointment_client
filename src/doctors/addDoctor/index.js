@@ -1,28 +1,48 @@
 import { useState } from "react";
-import { Form,Button, Container, Row, Col } from "react-bootstrap";
+import { Form,Button, Container, Row, Col, ToastContainer, Toast } from "react-bootstrap";
+import { addDoctor } from "../service";
 const AddDoctor = () => {
+    const [showToast, setToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastHeader, setToastHeader] = useState('');
+    const [toastBg, setToastBg] = useState('danger');
     const [values, setValues] = useState({
         name: '',
-        email: '',
         phone: '',
-        addr: '',
+        email: '',
+        address: '',
         designation: '',
-        desc: ''
+        description: ''
     })
     const resetValues = () => {
         setValues({
             name: '',
-            email: '',
             phone: '',
-            addr: '',
+            email: '',
+            address: '',
             designation: '',
-            desc: ''
+            description: ''
         });
+    }
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        const res = await addDoctor(values);
+        console.log(res);
+        if(res.success){
+            setToastHeader("Success")
+            setToastMessage("Doctor Added!")
+            setToastBg('success')
+        }else{
+            setToastHeader("Failed!")
+            setToastMessage(res.message.data.message)
+            setToastBg('danger')
+        }
+        setToast(true);
     }
     return (
         <div>
             <Container >
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Row className="justify-content-md-center">
                         <Col xs lg="6">
                             <Form.Group className="mb-3" >
@@ -58,10 +78,10 @@ const AddDoctor = () => {
                             <Form.Group className="mb-3" >
                                 <Form.Label>Physical address</Form.Label>
                                 <Form.Control type="text"
-                                    value={values.addr}
+                                    value={values.address}
                                     required
                                     onChange={(e) => {
-                                        setValues({ ...values, addr: e.target.value });
+                                        setValues({ ...values, address: e.target.value });
                                     }}
                                     placeholder="physical address" />
                             </Form.Group>
@@ -81,18 +101,27 @@ const AddDoctor = () => {
                             <Form.Group className="mb-3" >
                                 <Form.Label>Doctor's description</Form.Label>
                                 <Form.Control
-                                    value={values.desc}
+                                    value={values.description}
                                     onChange={(e) => {
-                                        setValues({ ...values, desc: e.target.value });
+                                        setValues({ ...values, description: e.target.value });
                                     }}
                                     as="textarea" rows={3} />
                             </Form.Group>
-                        <Button type ="submit" variant="success">Submit</Button>{' '}
+                        <Button type ="submit" variant="success"
+                        >Submit</Button>{' '}
                         <Button variant="outline-dark" onClick={resetValues}>Reset</Button>
                         </Col>
                     </Row>
 
                 </Form>
+            <ToastContainer className="p-3" position='top-end'>
+                <Toast show={showToast} onClose={()=>setToast(false)} bg={toastBg}>
+                    <Toast.Header>
+                        <strong className="me-auto">{toastHeader}</strong>
+                    </Toast.Header>
+                    <Toast.Body>{toastMessage}</Toast.Body>
+                </Toast>
+            </ToastContainer>
 
             </Container>
         </div>

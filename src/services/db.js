@@ -19,12 +19,19 @@ export const saveLoginInfo = async (data) => {
         return { success: false };
     });
 }
-export const validate =async () => {
+export const getToken =async () => {
     var db = getDb();
     const res = await db.table("admin").toArray();
     if(res[0]){
         const token = res[0].token;
-        const valid = await axios.get(api.ADMIN + `/validate/${token}`);
+        return {found: true, token};
+    }
+    throw {found: false, token: "no token found"};
+}
+export const validate =async () => {
+    const res = await getToken();
+    if(res.found){
+        const valid = await axios.get(api.ADMIN + `/validate/${res.token}`);
         return valid;
     }
     return false;

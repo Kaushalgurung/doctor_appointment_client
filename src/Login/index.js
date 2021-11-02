@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Toast, ToastContainer } from 'react-bootstrap';
 import { login } from '../services'
 import { saveLoginInfo } from "../services/db";
-import { useHistory } from "react-router";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +10,6 @@ const Login = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastHeader, setToastHeader] = useState('');
     const [toastBg, setToastBg] = useState('danger');
-    const history = useHistory();
     return (
         <Container fluid="sm" >
             <Form>
