@@ -3,7 +3,6 @@ import './App.css';
 import Doctors from './doctors';
 import { DoctorContextProvider } from './doctors/context';
 import Navs from './nav';
-import api from './constants/api';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +15,9 @@ import Login from './Login';
 import AddDoctor from './doctors/addDoctor';
 import { useEffect, useState } from 'react';
 import { validate } from './services/db';
+import { UserContextProvider } from './user/context';
+import DetailEdit from './doctors/details';
+import ChangePassword from './user';
 
 const ProtectedRoute = ({ authenticated, component: Component, ...rest }) => {
   return (
@@ -42,6 +44,7 @@ function App() {
   }, [validated])
   return (
     <Router>
+      <UserContextProvider>
       <DoctorContextProvider>
         {validated ? (
           <div>
@@ -56,6 +59,8 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/doctors" exact component={Doctors} />
               <ProtectedRoute authenticated={authenticated} path="/doctors/add" component={AddDoctor} />
+              <ProtectedRoute authenticated={authenticated} path="/admin/changepassword" component={ChangePassword} />
+              <Route path={`/doctors/:id`} component={DetailEdit} />
               <Redirect to='/'/>
             </Switch>
           </div>
@@ -63,6 +68,7 @@ function App() {
           <div>Loading..</div>
         )}
       </DoctorContextProvider>
+      </UserContextProvider>
     </Router >
   );
 }

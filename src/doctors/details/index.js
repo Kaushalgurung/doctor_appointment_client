@@ -1,12 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Form,Button, Container, Row, Col, ToastContainer, Toast } from "react-bootstrap";
+import { useParams } from "react-router";
 import { DoctorContext } from "../context";
-const AddDoctor = () => {
+const DetailEdit = () => {
+    const {getDoctorById} = useContext(DoctorContext);
+    const {id} = useParams(); 
+    const [details, setDetails] = useState({});
+    useEffect(async()=>{
+        const res = await getDoctorById(id);
+        setDetails(res);
+        setValues(res);
+    },[])
+    const {updateDoctor} = useContext(DoctorContext);
+
     const [showToast, setToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastHeader, setToastHeader] = useState('');
     const [toastBg, setToastBg] = useState('danger');
-    const {addDoctor} = useContext(DoctorContext);
     const [values, setValues] = useState({
         name: '',
         phone: '',
@@ -27,11 +37,11 @@ const AddDoctor = () => {
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        const res = await addDoctor(values);
+        const res = await updateDoctor(id, values);
         console.log(res);
         if(res.success){
             setToastHeader("Success")
-            setToastMessage("Doctor Added!")
+            setToastMessage("Doctor Updated!")
             setToastBg('success')
         }else{
             setToastHeader("Failed!")
@@ -128,4 +138,4 @@ const AddDoctor = () => {
         </div>
     )
 }
-export default AddDoctor;
+export default DetailEdit;

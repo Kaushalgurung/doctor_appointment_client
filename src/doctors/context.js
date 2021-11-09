@@ -3,6 +3,7 @@ import action from './action';
 import doctorReducer from './reducer';
 import * as Services from './service';
 import * as FILTER from './filters';
+import { useCallback } from 'react';
 const initialState = {
     filter: FILTER.ALL,
     refresh: false,
@@ -17,6 +18,22 @@ export const DoctorContextProvider = ({ children }) => {
     async function refreshData() {
         dispatch({ type: action.REFRESH_DATA });
     }
+    const getDoctorById = useCallback(async (id)=>{
+       return await Services.getDoctorById(id); 
+    },[])
+
+    const addDoctor = useCallback(async (values)=>{
+        return await Services.addDoctor(values);
+    },[] )
+
+    const updateDoctor = useCallback(async (id, values)=>{
+        return await Services.updateDoctor(id, values);
+    },[] )
+
+    const deleteDoctor = useCallback(async (id )=>{
+        return await Services.deleteDoctor(id );
+    },[] )
+    
     useEffect(() => {
         try {
             Services.getDoctors().then(
@@ -34,6 +51,10 @@ export const DoctorContextProvider = ({ children }) => {
             value={{
                 doctors: state.doctors,
                 refreshData,
+                getDoctorById,
+                addDoctor,
+                updateDoctor,
+                deleteDoctor,
                 pagination: state.pagination,
             }}>
             {children}

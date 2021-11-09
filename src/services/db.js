@@ -10,6 +10,11 @@ const getDb = () => {
     return db
 }
 
+export const logout=()=>{
+    var db = getDb();
+    db.admin.clear();
+}
+
 export const saveLoginInfo = async (data) => {
     var db = getDb();
     return db.admin.add(data).then(() => {
@@ -26,13 +31,13 @@ export const getToken =async () => {
         const token = res[0].token;
         return {found: true, token};
     }
-    throw {found: false, token: "no token found"};
+    return {found: false, token: "no token found"};
 }
 export const validate =async () => {
     const res = await getToken();
     if(res.found){
         const valid = await axios.get(api.ADMIN + `/validate/${res.token}`);
-        return valid;
+        return valid.data;
     }
     return false;
 }
