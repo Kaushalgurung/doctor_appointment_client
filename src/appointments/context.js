@@ -19,20 +19,15 @@ export const AppointmentContextProvider = ({ children }) => {
     const addAppointment= useCallback(async (values)=>{
         return await Services.addAppointment(values);
     },[] )
-    /*
-    const getDoctorById = useCallback(async (id)=>{
-       return await Services.getDoctorById(id); 
-    },[])
-
-
-    const updateDoctor = useCallback(async (id, values)=>{
-        return await Services.updateDoctor(id, values);
+    const approveAppointment= useCallback(async (id)=>{
+        return await Services.approveAppointment(id);
     },[] )
-
-    const deleteDoctor = useCallback(async (id )=>{
-        return await Services.deleteDoctor(id );
+    const deleteAppointment= useCallback(async (id)=>{
+        return await Services.deleteAppointment(id);
     },[] )
-    */
+    const completeAppointment= useCallback(async (id)=>{
+        return await Services.completeAppointment(id);
+    },[] )
     
     useEffect(() => {
         try {
@@ -51,6 +46,10 @@ export const AppointmentContextProvider = ({ children }) => {
             value={{
                 appointments: state.appointments,
                 addAppointment,
+                completeAppointment,
+                approveAppointment,
+                deleteAppointment,
+                refreshData,
                 pagination: state.pagination,
             }}>
             {children}

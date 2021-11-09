@@ -17,12 +17,10 @@ export const getAppointments = async (filter) => {
 };
 
 export const addAppointment = async (data) => {
-  console.log(data);
   const formData = new FormData();
   for (var key in data) {
     formData.append(key, data[key]);
   }
-
   try {
     const response = await axios.post(APPOINTMENT + "/register", formData, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -30,5 +28,64 @@ export const addAppointment = async (data) => {
     return { message: "appointment added", error: false };
   } catch (err) {
     return { message: err.response.data.message, error: true };
+  }
+};
+
+export const approveAppointment = async (id) => {
+  const res = await getToken();
+  if (res.found) {
+    try {
+      const response = await axios.put(
+        APPOINTMENT + `/approve/${id}`,
+        {},
+        { headers: { access_token: res.token } }
+      );
+      return { message: "appointment approved", error: false };
+    } catch (err) {
+      return { message: err.response.data.message, error: true };
+    }
+  } else {
+    return { message: "no access token", error: true };
+  }
+};
+
+export const completeAppointment = async (id) => {
+  const res = await getToken();
+  if (res.found) {
+    try {
+      const response = await axios.put(
+        APPOINTMENT + `/complete/${id}`,
+        {},
+        {
+          headers: {
+            access_token: res.token,
+          },
+        }
+      );
+      return { message: "appointment completed", error: false };
+    } catch (err) {
+      return { message: err.response.data.message, error: true };
+    }
+  } else {
+    return { message: "no access token", error: true };
+  }
+};
+
+export const deleteAppointment = async (id) => {
+  const res = await getToken();
+  if (res.found) {
+    try {
+      const response = await axios.delete(
+        APPOINTMENT + `/${id}`,
+        {
+          headers: { access_token: res.token },
+        }
+      );
+      return { message: "appointment deleted", error: false };
+    } catch (err) {
+      return { message: err.response.data.message, error: true };
+    }
+  } else {
+    return { message: "no access token", error: true };
   }
 };
