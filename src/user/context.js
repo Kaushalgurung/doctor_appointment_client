@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useCallback } from 'react';
 import action from './action';
 import userReducer from './reducer';
+import * as Service from './service';
 import * as DB from '../services/db';
 const initialState = {
     refresh: false,
@@ -26,6 +27,14 @@ export const UserContextProvider = ({ children }) => {
         DB.logout();
     }, [])
 
+    const login = useCallback(async(data) => {
+        return await Service.login(data);
+    }, [])
+
+    const changePassword = useCallback(async(data) => {
+        return await Service.changePassword(data);
+    }, [])
+
     useEffect(() => {
         (async () => {
             if (state.refresh) {
@@ -42,7 +51,9 @@ export const UserContextProvider = ({ children }) => {
                 changeAdimState,
                 is_admin: state.is_admin,
                 validate,
-                logout
+                logout,
+                login,
+                changePassword
             }}>
             {children}
         </UserContext.Provider>

@@ -1,6 +1,7 @@
 //(TODO: Samrat): conditional render Login page, list appointment and add doctor page
 import React, { useContext, useEffect, useState } from "react";
 import { NavDropdown, Navbar, Nav, Container, Button, Modal } from "react-bootstrap";
+import { useHistory } from "react-router";
 import { UserContext } from "../user/context";
 
 const Logout = ({ show, handleClose }) => {
@@ -28,6 +29,7 @@ const Logout = ({ show, handleClose }) => {
 export default function Navs({ authenticated }) {
     const { refreshData, is_admin } = useContext(UserContext);
     const [show, setShow] = useState(false);
+    const history = useHistory();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -63,7 +65,9 @@ export default function Navs({ authenticated }) {
                                         title="Admin"
                                         menuVariant="dark"
                                     >
-                                        <NavDropdown.Item href="#action/3.1">Change Password</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={()=>{
+                                            history.push('/admin/changepassword');
+                                        }}>Change Password</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={handleShow}>Logout</NavDropdown.Item>
                                     </NavDropdown>
