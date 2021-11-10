@@ -23,6 +23,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.nav-color{
+  background-color: rgb(33, 129, 33);
+}
 
 .App-link {
   color: #61dafb;
