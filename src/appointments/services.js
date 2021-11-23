@@ -1,6 +1,7 @@
 import axios from "axios";
 import API from "../constants/api";
 import { getToken } from "../services/db";
+var bufferToArrayBuffer = require('buffer-to-arraybuffer');
 
 const APPOINTMENT = API.APPOINTMENT;
 
@@ -70,6 +71,16 @@ export const completeAppointment = async (id) => {
     return { message: "no access token", error: true };
   }
 };
+export const downloadProblem = async(id)=>{
+  const res = await axios.get( APPOINTMENT + `/problem/${id}`);
+  const b = new Blob([Buffer.from(res.data.file.data)]);
+  const link = document.createElement('a');
+  const url = window.URL.createObjectURL(b);
+  link.href = url;
+  link.setAttribute('download', res.data.name);
+  document.body.appendChild(link);
+  link.click();
+}
 
 export const deleteAppointment = async (id) => {
   const res = await getToken();

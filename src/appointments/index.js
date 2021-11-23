@@ -9,6 +9,7 @@ const Appointments = () => {
     deleteAppointment,
     completeAppointment,
     refreshData,
+    downloadProblem
   } = useContext(AppointmentContext);
 
   const [showToast, setToast] = useState(false);
@@ -26,6 +27,7 @@ const Appointments = () => {
               <th>Phone </th>
               <th>Email</th>
               <th>Booked Doctor</th>
+              <th>Document</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -42,6 +44,14 @@ const Appointments = () => {
                       <Link to={`/doctors/${appnt.doctor_id}`}>
                         go to doctor
                       </Link>
+                    </td>
+                    <td>
+                      <Button onClick={(e)=>{
+                        e.preventDefault();
+                        downloadProblem(appnt._id);
+                      }}>
+                        Download problem document
+                      </Button>
                     </td>
                     {appnt.approved ? (
                       appnt.completed ? (
@@ -100,8 +110,8 @@ const Appointments = () => {
             })}
           </tbody>
         </Table>
-        <ToastContainer className="p-3" position="buttom-end">
-          <Toast show={showToast} onClose={() => setToast(false)} bg={toastBg}>
+        <ToastContainer  onClose={() => setToast(false)} className="p-3" position="buttom-end"delay={3000}>
+          <Toast show={showToast} onClose={() => setToast(false)} bg={toastBg}delay={3000} autohide>
             <Toast.Body>{toastMessage}</Toast.Body>
           </Toast>
         </ToastContainer>

@@ -25,6 +25,7 @@ function BookDoctor({ id, show, handleClose, handleShow }) {
     phone: "",
     medical_problem: "",
     doctor_id: id,
+    problem_doc: undefined 
   });
   const clearValues = () => {
     setValues({
@@ -34,6 +35,7 @@ function BookDoctor({ id, show, handleClose, handleShow }) {
       phone: "",
       medical_problem: "",
       doctor_id: "",
+      problem_doc: undefined
     });
   };
   const handleSubmit = async (e) => {
@@ -47,8 +49,8 @@ function BookDoctor({ id, show, handleClose, handleShow }) {
       setToastMessage(res.message);
       setToastBg("success");
       setToast(true);
-      clearValues();
-      handleClose();
+      //clearValues();
+      //handleClose();
     }
     else{
       setToastHeader("Failed!");
@@ -134,6 +136,24 @@ function BookDoctor({ id, show, handleClose, handleShow }) {
                 placeholder="Enter Phone-no:"
               />
             </FormGroup>
+            <Form.Group
+              controlId="formFileSm"
+              className="mb-3"
+              style={{ width: "400px" }}
+            >
+              <Form.Label>Small file input example</Form.Label>
+              <Form.Control
+                type="file"
+                size="sm"
+                onChange={async (e) =>
+                  setValues({
+                    ...values,
+                    problem_doc: 
+                      e.target.files[0]
+                  })
+                }
+              />
+            </Form.Group>
 
             {/*<Form.Group controlId="formFileMultiple" className="mb-3">
               <Form.Label>Upload medical report</Form.Label>

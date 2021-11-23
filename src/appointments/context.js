@@ -28,6 +28,9 @@ export const AppointmentContextProvider = ({ children }) => {
     const completeAppointment= useCallback(async (id)=>{
         return await Services.completeAppointment(id);
     },[] )
+    const downloadProblem= useCallback(async (id)=>{
+        return await Services.downloadProblem(id);
+    },[] )
     
     useEffect(() => {
         try {
@@ -50,6 +53,7 @@ export const AppointmentContextProvider = ({ children }) => {
                 approveAppointment,
                 deleteAppointment,
                 refreshData,
+                downloadProblem,
                 pagination: state.pagination,
             }}>
             {children}
