@@ -5,12 +5,14 @@ import { DoctorContext } from "../context";
 const DetailEdit = () => {
     const {getDoctorById} = useContext(DoctorContext);
     const {id} = useParams(); 
-    const [details, setDetails] = useState({});
-    useEffect(async()=>{
-        const res = await getDoctorById(id);
-        setDetails(res);
-        setValues(res);
-    },[])
+    useEffect( ()=>{
+        const init=async()=>{
+            const res = await getDoctorById(id);
+            setValues(res);
+        }
+        init();
+    }
+    ,[getDoctorById,id]);
     const {updateDoctor} = useContext(DoctorContext);
 
     const [showToast, setToast] = useState(false);

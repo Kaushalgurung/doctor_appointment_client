@@ -74,7 +74,7 @@ const Doctors = () => {
             </tr>
           </thead>
           <tbody>
-            {doctors.map((doctor, i) => {
+            {doctors.forEach((doctor, i) => {
               if (!doctor.is_archived) {
                 return (
                   <tr key={i}>
@@ -141,7 +141,7 @@ const Doctors = () => {
         <h2>Loading data...</h2>
       )}
 
-      {viewDoctor != new Object() && show ? (
+      {viewDoctor !== {} && show ? (
         <BookDoctor
           id={viewDoctor._id}
           show={show}
@@ -151,7 +151,7 @@ const Doctors = () => {
       ) : (
         ""
       )}
-      {viewDoctor != new Object() && viewDetails ? (
+      {viewDoctor !== {} && viewDetails ? (
         <Detail
           open={viewDetails}
           doctor={viewDoctor}
@@ -161,7 +161,7 @@ const Doctors = () => {
       ) : (
         ""
       )}
-      {viewDoctor != new Object() && viewDelete ? (
+      {viewDoctor !== {} && viewDelete ? (
         <DeleteDoctor
           open={viewDelete}
           id={viewDoctor._id}

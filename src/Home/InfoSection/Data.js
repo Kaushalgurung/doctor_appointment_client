@@ -1,3 +1,6 @@
+import img1 from "../../Images/svg-1.svg";
+import img2 from "../../Images/svg-2.svg";
+import img3 from "../../Images/svg-3.svg";
 export const homeObjOne = {
   id: "features",
   lightbg: false,
@@ -9,7 +12,7 @@ export const homeObjOne = {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
   buttonlabel: "Get Started",
   imgStart: false,
-  img: require("../../Images/svg-1.svg"),
+  img: img1,
   alt: "dactar",
   dark: true,
   primary: true,
@@ -27,7 +30,7 @@ export const homeObjTwo = {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
   buttonlabel: "Wanna Know",
   imgStart: true,
-  img: require("../../Images/svg-2.svg"),
+  img: img2,
   alt: "Medical",
   dark: false,
   primary: false,
@@ -45,7 +48,7 @@ export const homeObjThree = {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
   buttonlabel: "Get Started",
   imgStart: false,
-  img: require("../../Images/svg-3.svg"),
+  img: img3,
   alt: "dactar",
   dark: false,
   primary: false,

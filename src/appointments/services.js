@@ -1,7 +1,6 @@
 import axios from "axios";
 import API from "../constants/api";
 import { getToken } from "../services/db";
-var bufferToArrayBuffer = require('buffer-to-arraybuffer');
 
 const APPOINTMENT = API.APPOINTMENT;
 
@@ -23,7 +22,7 @@ export const addAppointment = async (data) => {
     formData.append(key, data[key]);
   }
   try {
-    const response = await axios.post(APPOINTMENT + "/register", formData, {
+    await axios.post(APPOINTMENT + "/register", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return { message: "appointment added", error: false };
@@ -36,7 +35,7 @@ export const approveAppointment = async (id) => {
   const res = await getToken();
   if (res.found) {
     try {
-      const response = await axios.put(
+      await axios.put(
         APPOINTMENT + `/approve/${id}`,
         {},
         { headers: { access_token: res.token } }
@@ -54,7 +53,7 @@ export const completeAppointment = async (id) => {
   const res = await getToken();
   if (res.found) {
     try {
-      const response = await axios.put(
+      await axios.put(
         APPOINTMENT + `/complete/${id}`,
         {},
         {
@@ -86,7 +85,7 @@ export const deleteAppointment = async (id) => {
   const res = await getToken();
   if (res.found) {
     try {
-      const response = await axios.delete(
+      await axios.delete(
         APPOINTMENT + `/${id}`,
         {
           headers: { access_token: res.token },

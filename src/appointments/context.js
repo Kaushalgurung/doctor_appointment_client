@@ -13,9 +13,9 @@ export const AppointmentContext = createContext(initialState);
 
 export const AppointmentContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(appointmentReducer, initialState);
-    async function refreshData() {
+    const refreshData = useCallback(async ()=>{
         dispatch({ type: action.REFRESH_DATA });
-    }
+    },[])
     const addAppointment= useCallback(async (values)=>{
         return await Services.addAppointment(values);
     },[] )

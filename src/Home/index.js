@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Navs from "../nav";
+import React, { useState, useRef } from "react";
 import Sidebar from "../sidebar";
 import HeroSection from "./HeroSection";
 import { homeObjOne, homeObjTwo, homeObjThree } from "./InfoSection/Data";
@@ -13,6 +12,11 @@ const Home = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+  const aboutRef = useRef();
+
+  function handleBackClick() {
+    aboutRef.current.scrollIntoView({ behavior: "smooth" });
+  }
 
   return (
     <>
@@ -21,7 +25,7 @@ const Home = () => {
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />
       <Services />
-      <InfoSection {...homeObjThree} />
+      <InfoSection id="about" ref={aboutRef} {...homeObjThree} />
       <Footer />
     </>
   );

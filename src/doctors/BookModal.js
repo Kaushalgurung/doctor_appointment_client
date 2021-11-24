@@ -49,8 +49,8 @@ function BookDoctor({ id, show, handleClose, handleShow }) {
       setToastMessage(res.message);
       setToastBg("success");
       setToast(true);
-      //clearValues();
-      //handleClose();
+      clearValues();
+      handleClose();
     }
     else{
       setToastHeader("Failed!");

@@ -14,7 +14,6 @@ const Appointments = () => {
 
   const [showToast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  const [toastBg, setToastBg] = useState("success");
 
   if (appointments.length > 0) {
     return (
@@ -32,7 +31,7 @@ const Appointments = () => {
             </tr>
           </thead>
           <tbody>
-            {appointments.map((appnt, i) => {
+            {appointments.forEach((appnt, i) => {
               if (!appnt.is_archived) {
                 return (
                   <tr key={i}>
@@ -111,7 +110,7 @@ const Appointments = () => {
           </tbody>
         </Table>
         <ToastContainer  onClose={() => setToast(false)} className="p-3" position="buttom-end"delay={3000}>
-          <Toast show={showToast} onClose={() => setToast(false)} bg={toastBg}delay={3000} autohide>
+          <Toast show={showToast} onClose={() => setToast(false)} bg={"success"}delay={3000} autohide>
             <Toast.Body>{toastMessage}</Toast.Body>
           </Toast>
         </ToastContainer>
