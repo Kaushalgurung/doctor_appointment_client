@@ -13,7 +13,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from "./Home";
-import About from "./About";
 import Login from "./Login";
 import AddDoctor from "./doctors/addDoctor";
 import { useEffect, useState } from "react";
@@ -63,7 +62,6 @@ function App() {
                     ""
                   )}
                   <Route path="/" exact component={Home} />
-                  <Route path="/about" component={About} />
                   <Route path="/doctors" exact component={Doctors} />
                   <ProtectedRoute
                     authenticated={authenticated}

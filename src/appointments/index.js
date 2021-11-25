@@ -31,7 +31,7 @@ const Appointments = () => {
             </tr>
           </thead>
           <tbody>
-            {appointments.forEach((appnt, i) => {
+            {appointments.map((appnt, i) => {
               if (!appnt.is_archived) {
                 return (
                   <tr key={i}>

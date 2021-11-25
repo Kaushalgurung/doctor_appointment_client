@@ -60,7 +60,7 @@ const Footer = () => {
             <FooterLinkItems>
               <FooterLinkTitle>Social Media</FooterLinkTitle>
               <FooterLink to="/">FaceBook</FooterLink>
-              <FooterLink to="/">Instagram</FooterLink>
+              <FooterLink to="https://instagram.com">Instagram</FooterLink>
               <FooterLink to="/">Youtube</FooterLink>
               <FooterLink to="/">Twitter</FooterLink>
             </FooterLinkItems>
@@ -76,7 +76,7 @@ const Footer = () => {
               <SocialIconLink href="/" target="_blank" aria-label="Facebook">
                 <FaFacebook />
               </SocialIconLink>
-              <SocialIconLink href="/" target="_blank" aria-label="Instagram">
+              <SocialIconLink href="https://instagram.com" target="_blank" aria-label="Instagram">
                 <FaInstagram />
               </SocialIconLink>
               <SocialIconLink href="/" target="_blank" aria-label="Twitter">

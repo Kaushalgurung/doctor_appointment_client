@@ -1,5 +1,5 @@
 import { DoctorContext } from "./context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Table, Button, Modal } from "react-bootstrap";
 import { UserContext } from "../user/context";
 import { useHistory } from "react-router";
@@ -48,6 +48,7 @@ const Doctors = () => {
   const handleDeleteClose = () => setViewDelete(false);
   const handleDeleteShow = () => setViewDelete(true);
 
+
   const history = useHistory();
   return (
     <div>
@@ -74,7 +75,7 @@ const Doctors = () => {
             </tr>
           </thead>
           <tbody>
-            {doctors.forEach((doctor, i) => {
+            {doctors.map((doctor, i) => {
               if (!doctor.is_archived) {
                 return (
                   <tr key={i}>
