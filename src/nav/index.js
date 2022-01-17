@@ -1,5 +1,5 @@
-//(TODO: Samrat): conditional render Login page, list appointment and add doctor page
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import {
   NavDropdown,
   Navbar,
@@ -49,11 +49,31 @@ export default function Navs({ authenticated }) {
   }, []);
   return (
     <>
+              <div className="topbar">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-8 text-sm">
+                  <div className="site-info">
+                    <a href="#"><span className="mai-call text-primary" /> +00 123 4455 6666</a>
+                    <span className="divider">|</span>
+                    <a href="mailto: marketingsginerix@gmail.com"><span className="mai-mail text-primary" /> mail@example.com</a>
+                  </div>
+                </div>
+                <div className="col-sm-4 text-right text-sm">
+                  <div className="social-mini-button">
+                    <a href="#"><span className="mai-logo-facebook-f" /></a>
+                    <a href="#"><span className="mai-logo-twitter" /></a>
+                    <a href="#"><span className="mai-logo-instagram" /></a>
+                  </div>
+                </div>
+              </div> {/* .row */}
+            </div> {/* .container */}
+          </div>
       <Navbar collapseOnSelect expand="lg" className="nav-color" variant="dark">
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Navbar.Brand href="/">CARE YOU pharmacy</Navbar.Brand>
+          <Link to = "/"><a className="navbar-brand" ><span className="text-primary">Care</span>-U</a></Link>
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/doctors">List Doctors</Nav.Link>

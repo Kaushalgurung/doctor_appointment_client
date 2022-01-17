@@ -21,14 +21,14 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .nav-color{
-  background-color: rgb(33, 129, 33);
+  background-color: rgb(59, 210, 221);
 }
 
 .App-link {
-  color: #61dafb;
+  color: #000507;
 }
 
 @keyframes App-logo-spin {
